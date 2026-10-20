@@ -43,8 +43,32 @@ src/pages/        index, leistungen, projekte, ueber-mich, kontakt, impressum, d
 src/layouts/      Base.astro (Header, Footer, SEO, Canonical)
 src/styles/       global.css (Design-Tokens, kein Framework nötig)
 public/           favicon.svg, robots.txt
+brand/            Logo-Varianten A–D (SVG) + logo-varianten.html (Vergleichsseite)
 dist/             Build-Ergebnis (wird deployt, NICHT eingecheckt)
 deploy.sh         Build + Push des dist/ auf Branch `deploy`
+```
+
+## Marke / Logo
+
+Das Marken-Icon steht im Header links vor dem Namen «Marco Dütsch» und ist
+gleichzeitig das Favicon. Es gibt **vier Varianten** im Grünton `#0b6e4f`; alle
+liegen als SVG in **`brand/`**, inklusive Vergleichsseite und Anleitung zum
+Wechseln — siehe [`brand/README.md`](brand/README.md).
+
+Im Einsatz ist derzeit **Variante B (Knoten-Kette)** — eingebaut inline in
+`src/layouts/Base.astro` (folgt dem CSS-Token `--accent`) und als
+`public/favicon.svg`.
+
+## Repositories
+
+- **GitHub** (`origin`) — Quellcode und Backup dieser Website, inkl. aller
+  Logo-Varianten: `marcoduetsch-oc/duetsch-net-website`
+- **Green-Panel** (`green`) — Ziel für das Deployment: nur der Branch `deploy`
+  mit dem fertigen `dist/`, sonst nichts.
+
+```bash
+git remote add green <Repository-URL aus dem Green-Panel>
+DEPLOY_REMOTE=green npm run deploy
 ```
 
 ## Lokal
