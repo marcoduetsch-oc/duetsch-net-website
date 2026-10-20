@@ -26,7 +26,16 @@ import { calUrl } from '../config';
   <body>
     <header class="site-header">
       <div class="wrap">
-        <a class="brand" href="/">Marco Dütsch<span>.</span></a>
+        <a class="brand" href="/">
+          <svg class="brand-mark" viewBox="0 0 32 32" width="30" height="30" role="img" aria-label="Marco Dütsch">
+            <rect width="32" height="32" rx="9" fill="currentColor" />
+            <path d="M10 22 L22 10" stroke="#fff" stroke-width="2.4" stroke-linecap="round" fill="none" />
+            <circle cx="10" cy="22" r="3" fill="#fff" />
+            <circle cx="16" cy="16" r="3" fill="#fff" />
+            <circle cx="22" cy="10" r="3" fill="#fff" />
+          </svg>
+          <span class="brand-name">Marco Dütsch<i>.</i></span>
+        </a>
         <nav class="nav" aria-label="Hauptnavigation">
           <a href="/leistungen/" aria-current={Astro.url.pathname === '/leistungen/' ? 'page' : undefined}>Leistungen</a>
           <a href="/projekte/" aria-current={Astro.url.pathname === '/projekte/' ? 'page' : undefined}>Projekte</a>

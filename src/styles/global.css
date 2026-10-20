@@ -57,8 +57,16 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 48px 0; }
   backdrop-filter: saturate(180%) blur(10px); border-bottom: 1px solid var(--line);
 }
 .site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 66px; }
-.brand { font-weight: 700; letter-spacing: -.02em; text-decoration: none; color: var(--ink); font-size: 1.05rem; }
-.brand span { color: var(--accent); }
+.brand {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-weight: 700; letter-spacing: -.02em; text-decoration: none;
+  color: var(--ink); font-size: 1.05rem; line-height: 1.1;
+}
+.brand-name { display: inline-block; }
+.brand-name i { color: var(--accent); font-style: normal; }
+/* Logo-Marke: grünes Quadrat mit Knoten-Kette (Lieferkette/Netzwerk) */
+.brand-mark { display: block; flex: 0 0 auto; width: 30px; height: 30px; color: var(--accent); }
+@media (max-width: 900px) { .brand-mark { width: 27px; height: 27px; } }
 .nav { display: flex; gap: 22px; align-items: center; }
 .nav a { text-decoration: none; color: var(--ink-soft); font-size: .95rem; }
 .nav a:hover, .nav a[aria-current="page"] { color: var(--ink); }
