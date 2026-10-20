@@ -61,15 +61,21 @@ Im Einsatz ist derzeit **Variante B (Knoten-Kette)** — eingebaut inline in
 
 ## Repositories
 
-- **GitHub** (`origin`) — Quellcode und Backup dieser Website, inkl. aller
-  Logo-Varianten: `marcoduetsch-oc/duetsch-net-website`
-- **Green-Panel** (`green`) — Ziel für das Deployment: nur der Branch `deploy`
-  mit dem fertigen `dist/`, sonst nichts.
+- **GitHub `origin`** — Quellcode und Backup dieser Website, inkl. aller
+  Logo-Varianten: `marcoduetsch-oc/duetsch-net-website` (**privat**, Default `main`)
+- **GitHub `deployrepo`** — reiner Build-Output für den Green-Pull:
+  `marcoduetsch-oc/duetsch-net-deploy` (**öffentlich**, Default-Branch `deploy`,
+  enthält nur das fertige `dist/` — sonst nichts)
+- **Green-Panel `green`** — optionaler Remote, falls das Panel eine eigene
+  Repository-URL ausgibt (dann nur Branch `deploy` pushen).
 
 ```bash
-git remote add green <Repository-URL aus dem Green-Panel>
-DEPLOY_REMOTE=green npm run deploy
+DEPLOY_REMOTE=deployrepo npm run deploy   # baut + pusht Branch deploy zu GitHub
 ```
+
+Das Deploy-Repo ist absichtlich **öffentlich**: das Green-Panel klont ohne
+Zugangsdaten, es liegt kein Token im Panel, und der Inhalt ist ohnehin die
+öffentliche Website. Der Quellcode bleibt im privaten Repo.
 
 ## Lokal
 
@@ -85,15 +91,21 @@ npm run preview  # gebaute Seite lokal prüfen
 **Kurz:** `npm run deploy` baut die Seite und pusht sie als Branch `deploy`
 (enthalten ist nur das fertige `dist/`, kein Quellcode, kein Build-Schritt).
 
-1. **Remote setzen.** Im Green-Panel die Git-Integration öffnen und die dort
-   angezeigte Repository-URL als Remote eintragen:
-   `git remote add origin <URL aus dem Panel>`
-   (Alternativ ein GitHub-Repo verwenden und im Panel «externes Repository» +
-   Webhook konfigurieren.)
-2. **Deployen:** `npm run deploy`
-3. **Im Panel:** Git-Integration → Pull ausführen, Branch **`deploy`**,
-   Zielverzeichnis = **Web-Root der Domain** (`duetsch.net`).
-4. **Prüfen:** `curl -I https://www.duetsch.net/` und Startseite im Browser.
+1. **Web-Root leeren.** Im Panel-Datei-Manager alle alten WordPress-Dateien
+   (`index.php`, `wp-*`, `xmlrpc.php`, `wp-content/`, `wp-config.php`) in einen
+   Unterordner `_wp-archiv-2026/` verschieben. Solange `index.php` im Root liegt,
+   kann sie `index.html` verdrängen.
+2. **Git-Integration anlegen** (Panel → Domain `duetsch.net` → Git-Integration):
+   - **Git Repository URL:** `https://github.com/marcoduetsch-oc/duetsch-net-deploy.git`
+   - **Repository ist öffentlich** ✔ (das Deploy-Repo ist public, kein Token nötig)
+   - **Zielverzeichnis:** Web-Root von `duetsch.net` (Stammverzeichnis der Domain).
+     ⚠️ **Nicht** den Panel-Default `/httpdocs/git` übernehmen — damit läge die
+     Seite unter `duetsch.net/git/`. Falls `/httpdocs` das Stammverzeichnis der
+     Domain ist, dort `/httpdocs` eintragen.
+3. **Pull auslösen** (Branch `deploy` — bei externem Repo zieht das Panel den
+   Default-Branch, der genau `deploy` ist).
+4. **Prüfen:** `curl -I https://www.duetsch.net/` und Startseite im Browser;
+   `wp-login.php` muss danach 404 liefern.
 
 > ⚠️ **DNS nicht anfassen.** Die DNS-Verwaltung im Green-Panel muss auf
 > **«Manuell»** bleiben. Ein Wechsel auf «Automatisch» löscht alle
