@@ -1,0 +1,51 @@
+---
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+import '../styles/global.css';
+---
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="de_CH" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="robots" content="index, follow" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/">Marco Dütsch<span>.</span></a>
+        <nav class="nav" aria-label="Hauptnavigation">
+          <a href="/leistungen/" aria-current={Astro.url.pathname === '/leistungen/' ? 'page' : undefined}>Leistungen</a>
+          <a href="/ueber-mich/" aria-current={Astro.url.pathname === '/ueber-mich/' ? 'page' : undefined}>Über mich</a>
+          <a href="/kontakt/" aria-current={Astro.url.pathname === '/kontakt/' ? 'page' : undefined}>Kontakt</a>
+          <a class="btn btn-primary" href="/kontakt/">Erstgespräch</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <p style="margin:0">© {new Date().getFullYear()} Marco Dütsch · Management-Beratung, Winterthur</p>
+        <p style="margin:0">
+          <a href="/impressum/">Impressum</a> ·
+          <a href="/datenschutz/">Datenschutz</a> ·
+          <a href="mailto:marco@duetsch.net">marco@duetsch.net</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
