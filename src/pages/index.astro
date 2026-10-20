@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { calUrl } from '../config';
 ---
 <Base
   title="Marco Dütsch — Beratung für KI, Supply Chain und Interim-Management"
@@ -16,7 +17,7 @@ import Base from '../layouts/Base.astro';
           Pragmatisch, messbar, ohne Beratungsballast.
         </p>
         <div class="btn-row">
-          <a class="btn btn-primary" href="/kontakt/">Erstgespräch vereinbaren</a>
+          <a class="btn btn-primary" href={calUrl} target="_blank" rel="noopener">Erstgespräch vereinbaren</a>
           <a class="btn btn-ghost" href="/leistungen/">Leistungen ansehen</a>
         </div>
         <ul class="hero-facts">
@@ -161,7 +162,7 @@ import Base from '../layouts/Base.astro';
         </article>
       </div>
       <div class="btn-row">
-        <a class="btn btn-primary" href="/kontakt/">Erstgespräch vereinbaren</a>
+        <a class="btn btn-primary" href={calUrl} target="_blank" rel="noopener">Erstgespräch vereinbaren</a>
       </div>
     </div>
   </section>

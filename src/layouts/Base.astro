@@ -6,6 +6,7 @@ interface Props {
 const { title, description } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 import '../styles/global.css';
+import { calUrl } from '../config';
 ---
 <!doctype html>
 <html lang="de">
@@ -30,7 +31,7 @@ import '../styles/global.css';
           <a href="/leistungen/" aria-current={Astro.url.pathname === '/leistungen/' ? 'page' : undefined}>Leistungen</a>
           <a href="/ueber-mich/" aria-current={Astro.url.pathname === '/ueber-mich/' ? 'page' : undefined}>Über mich</a>
           <a href="/kontakt/" aria-current={Astro.url.pathname === '/kontakt/' ? 'page' : undefined}>Kontakt</a>
-          <a class="btn btn-primary" href="/kontakt/">Erstgespräch</a>
+          <a class="btn btn-primary" href={calUrl} target="_blank" rel="noopener">Erstgespräch</a>
         </nav>
       </div>
     </header>

@@ -130,3 +130,22 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 48px 0; }
   .nav a:not(.btn) { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
+
+/* ---------- Cal.com Terminbuchung ---------- */
+[hidden] { display: none !important; }
+.cal-wrap { margin-top: 32px; }
+.cal-consent {
+  border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--bg-alt); padding: 28px;
+}
+.cal-consent p { margin-bottom: .6em; }
+.cal-consent .muted { font-size: .92rem; }
+.cal-inline {
+  height: 700px; border: 1px solid var(--line); border-radius: var(--radius);
+  overflow: auto; background: #fff;
+}
+.cal-inline iframe { width: 100%; height: 100%; border: 0; }
+@media (max-width: 760px) {
+  .cal-inline { height: 620px; }
+  .cal-consent { padding: 22px; }
+}

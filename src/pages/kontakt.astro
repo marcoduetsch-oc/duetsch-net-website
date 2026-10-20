@@ -1,25 +1,62 @@
 ---
 import Base from '../layouts/Base.astro';
+import { site, calUrl } from '../config';
 ---
 <Base
-  title="Kontakt — Marco Dütsch"
-  description="Kontakt für Beratung und Interim-Mandate: Marco Dütsch, Winterthur. E-Mail, Telefon und Terminvereinbarung."
+  title="Kontakt & Termin — Marco Dütsch"
+  description="Erstgespräch mit Marco Dütsch, Winterthur: Termin direkt online buchen oder per E-Mail anfragen. 45 Minuten, unverbindlich und kostenlos."
 >
   <section>
     <div class="wrap">
       <p class="eyebrow">Kontakt</p>
       <h1>Erstgespräch — unverbindlich.</h1>
-      <div class="contact-grid">
-        <div>
-          <p class="lead">
-            Schreiben Sie mir zwei, drei Sätze zur Ausgangslage. Ich antworte innerhalb
-            eines Arbeitstags mit einer ersten Einschätzung und Terminvorschlägen.
+      <p class="lead narrow">
+        45 Minuten, in denen wir die Ausgangslage sortieren. Termin direkt online
+        buchen — oder mir zwei, drei Sätze zur Situation schreiben.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href={calUrl} target="_blank" rel="noopener">
+          Termin online buchen
+        </a>
+        <a class="btn btn-ghost" href={`mailto:${site.email}`}>{site.email}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-alt">
+    <div class="wrap">
+      <p class="eyebrow">Terminbuchung</p>
+      <h2>Kalender öffnen und Zeit wählen.</h2>
+      <p class="lead narrow">
+        Die Buchung läuft über Cal.com. Sie sehen dort meine freien Zeiten, wählen
+        einen Slot und erhalten die Bestätigung per E-Mail — inklusive Video-Link
+        für ein Online-Gespräch.
+      </p>
+
+      <div class="cal-wrap">
+        <!-- Zwei-Klick-Prinzip: Cal.com wird erst nach aktivem Klick geladen.
+             Vorher findet keine Übermittlung an Dritte statt (siehe /datenschutz/). -->
+        <div class="cal-consent" id="cal-consent">
+          <p><strong>Kalender von Cal.com laden</strong></p>
+          <p class="muted">
+            Beim Laden werden Daten an Cal.com (Cal.com, Inc., USA) übermittelt.
+            Details in der <a href="/datenschutz/">Datenschutzerklärung</a>.
           </p>
+          <div class="btn-row" style="margin-top:20px">
+            <button type="button" class="btn btn-primary" id="cal-load">Kalender anzeigen</button>
+            <a class="btn btn-ghost" href={calUrl} target="_blank" rel="noopener">Auf cal.com öffnen</a>
+          </div>
+        </div>
+        <div class="cal-inline" id="cal-inline" hidden></div>
+      </div>
+
+      <div class="contact-grid" style="margin-top:56px">
+        <div>
           <ul class="contact-list">
-            <li><strong>E-Mail</strong> <a href="mailto:marco@duetsch.net">marco@duetsch.net</a></li>
-            <li><strong>Telefon</strong> [TELEFONNUMMER EINSETZEN]</li>
+            <li><strong>E-Mail</strong> <a href={`mailto:${site.email}`}>{site.email}</a></li>
             <li><strong>Ort</strong> Winterthur, Schweiz</li>
-            <li><strong>Termin</strong> [BUCHUNGSLINK EINSETZEN, z. B. Cal.com]</li>
+            <li><strong>Einsatzgebiet</strong> Schweiz und remote, international auf Anfrage</li>
+            <li><strong>Antwortzeit</strong> in der Regel innert eines Arbeitstags</li>
           </ul>
         </div>
         <aside class="hero-card">
@@ -37,4 +74,59 @@ import Base from '../layouts/Base.astro';
       </div>
     </div>
   </section>
+
+  <script is:inline define:vars={{ calLink: site.calLink, calOrigin: site.calOrigin }}>
+    (function () {
+      var trigger = document.getElementById('cal-load');
+      var consent = document.getElementById('cal-consent');
+      var target = document.getElementById('cal-inline');
+      if (!trigger || !consent || !target) return;
+
+      trigger.addEventListener('click', function () {
+        consent.hidden = true;
+        target.hidden = false;
+
+        // Cal.com Embed-Loader (offizielles Snippet, erst hier injiziert)
+        (function (C, A, L) {
+          var p = function (a, ar) { a.q.push(ar); };
+          var d = C.document;
+          C.Cal = C.Cal || function () {
+            var cal = C.Cal;
+            var ar = arguments;
+            if (!cal.loaded) {
+              cal.ns = {};
+              cal.q = cal.q || [];
+              d.head.appendChild(d.createElement('script')).src = A;
+              cal.loaded = true;
+            }
+            if (ar[0] === L) {
+              var api = function () { p(api, arguments); };
+              var namespace = ar[1];
+              api.q = api.q || [];
+              if (typeof namespace === 'string') {
+                cal.ns[namespace] = cal.ns[namespace] || api;
+                p(cal.ns[namespace], ar);
+                p(cal, ['initNamespace', namespace]);
+              } else p(cal, ar);
+              return;
+            }
+            p(cal, ar);
+          };
+        })(window, calOrigin + '/embed/embed.js', 'init');
+
+        Cal('init', { origin: calOrigin });
+        Cal('inline', {
+          elementOrSelector: '#cal-inline',
+          calLink: calLink,
+          config: { layout: 'month_view', theme: 'light' }
+        });
+        Cal('ui', {
+          theme: 'light',
+          layout: 'month_view',
+          hideEventTypeDetails: false,
+          styles: { branding: { brandColor: '#0b6e4f' } }
+        });
+      }, { once: true });
+    })();
+  </script>
 </Base>

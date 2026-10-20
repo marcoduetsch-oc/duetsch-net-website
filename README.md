@@ -1,8 +1,16 @@
 # duetsch.net — Website (Marco Dütsch)
 
 Statische Website (Astro), gebaut für die **Green.ch Git-Integration**.
-Kein Server-Build, keine Datenbank, keine externen Requests (Systemschriften,
-keine Cookies, kein Tracking) — passt zum revDSG-Text in `/datenschutz/`.
+Kein Server-Build, keine Datenbank, keine externen Requests beim Seitenaufruf
+(Systemschriften, keine eigenen Cookies, kein Tracking). Einzige Ausnahme ist die
+Terminbuchung über **Cal.com**, und die wird per Zwei-Klick-Prinzip erst nach
+aktivem Klick geladen — passt zum revDSG-Text in `/datenschutz/`.
+
+## Konfiguration
+
+Alle änderbaren Werte stehen in **`src/config.ts`**: E-Mail-Adresse und der
+Cal.com-Buchungslink (`calLink` im Format `username/event-slug`). Auf der Website
+gibt es **keine Telefonnummer**; der Kontaktweg ist Cal.com oder E-Mail.
 
 ## Struktur
 
@@ -45,9 +53,11 @@ npm run preview  # gebaute Seite lokal prüfen
 
 ## Vor dem Go-Live noch einsetzen
 
-- [ ] `kontakt.astro`: Telefonnummer, Buchungslink (z. B. Cal.com)
+- [ ] `src/config.ts`: echten Cal.com-Handle einsetzen — aktuell steht dort der
+      Platzhalter `marco-duetsch/erstgespraech` (Marker `TODO(cal.com)`);
+      `deploy.sh` warnt beim Deploy, solange der Marker drin ist
 - [ ] `impressum.astro`: Strasse, PLZ, Rechtsform, UID/MWST (falls vorhanden)
-- [ ] `datenschutz.astro`: Datum, Aufbewahrungsdauer der Logfiles
+- [ ] `datenschutz.astro`: Aufbewahrungsdauer der Logfiles ([AUFBEWAHRUNGSDAUER])
 - [ ] `ueber-mich.astro`: Portraitfoto (optional), ggf. Abschlüsse/Zertifikate
 - [ ] Zahlen/Referenzen in `index.astro` (nur echte, belegbare Angaben)
 - [ ] Arbeitgeber-Nennung: aktuell als «internationaler Möbel- und

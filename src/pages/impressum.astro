@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { site, calUrl } from '../config';
 ---
 <Base
   title="Impressum — Marco Dütsch"
@@ -18,7 +19,7 @@ import Base from '../layouts/Base.astro';
       <h2>Kontakt</h2>
       <p>
         E-Mail: <a href="mailto:marco@duetsch.net">marco@duetsch.net</a><br />
-        Telefon: [TELEFONNUMMER EINSETZEN]
+        Terminbuchung: <a href={calUrl} target="_blank" rel="noopener">cal.com/{site.calLink}</a>
       </p>
       <h2>Rechtsform und Registereintrag</h2>
       <p>

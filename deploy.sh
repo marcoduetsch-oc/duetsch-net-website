@@ -13,6 +13,11 @@ cd "$SRC"
 BRANCH="${DEPLOY_BRANCH:-deploy}"
 REMOTE="${DEPLOY_REMOTE:-origin}"
 
+if grep -q "TODO(cal.com)" src/config.ts 2>/dev/null; then
+  echo "⚠  WARNUNG: Der Cal.com-Link in src/config.ts ist noch ein Platzhalter"
+  echo "   (Zeile mit TODO(cal.com)). Buchungs-Buttons führen ins Leere."
+fi
+
 echo "→ Build (astro)"
 npm run build
 
