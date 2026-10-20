@@ -49,7 +49,9 @@ if [ -n "$REMOTE_URL" ]; then
 else
   echo "! Kein Remote '${REMOTE}' konfiguriert."
   echo "  Entweder Green-Panel-Repo-URL als Remote setzen:"
-  echo "      git remote add origin <URL aus dem Green-Panel>"
-  echo "  oder GitHub-Repo verwenden (dann zieht das Panel von dort)."
+  echo "      git remote add green <URL aus dem Green-Panel>"
+  echo "      DEPLOY_REMOTE=green npm run deploy"
+  echo "  oder GitHub-Repo verwenden (dann zieht das Panel von dort):"
+  echo "      DEPLOY_REMOTE=origin npm run deploy   # pusht Branch deploy zu GitHub"
   echo "  Der Deploy-Commit liegt lokal auf Branch ${BRANCH}."
 fi
