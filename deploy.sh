@@ -23,7 +23,11 @@ npm run build
 
 [ -f dist/index.html ] || { echo "FEHLER: dist/index.html fehlt — Build unvollständig."; exit 1; }
 
-REMOTE_URL="$(git remote get-url "$REMOTE" 2>/dev/null || true)"
+# DEPLOY_REMOTE darf ein Remote-Name (z. B. origin) ODER direkt eine URL sein.
+case "$REMOTE" in
+  */*|*:*) REMOTE_URL="$REMOTE" ;;
+  *)       REMOTE_URL="$(git remote get-url "$REMOTE" 2>/dev/null || true)" ;;
+esac
 SRC_REV="$(git rev-parse --short HEAD 2>/dev/null || echo 'kein-commit')"
 
 TMP="$(mktemp -d)"
