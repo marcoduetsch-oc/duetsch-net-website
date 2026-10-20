@@ -29,6 +29,7 @@ import { calUrl } from '../config';
         <a class="brand" href="/">Marco Dütsch<span>.</span></a>
         <nav class="nav" aria-label="Hauptnavigation">
           <a href="/leistungen/" aria-current={Astro.url.pathname === '/leistungen/' ? 'page' : undefined}>Leistungen</a>
+          <a href="/projekte/" aria-current={Astro.url.pathname === '/projekte/' ? 'page' : undefined}>Projekte</a>
           <a href="/ueber-mich/" aria-current={Astro.url.pathname === '/ueber-mich/' ? 'page' : undefined}>Über mich</a>
           <a href="/kontakt/" aria-current={Astro.url.pathname === '/kontakt/' ? 'page' : undefined}>Kontakt</a>
           <a class="btn btn-primary" href={calUrl} target="_blank" rel="noopener">Erstgespräch</a>
@@ -41,6 +42,13 @@ import { calUrl } from '../config';
     <footer class="site-footer">
       <div class="wrap">
         <p style="margin:0">© {new Date().getFullYear()} Marco Dütsch · Management-Beratung, Winterthur</p>
+        <p style="margin:0 0 6px">
+          <a href="/">Startseite</a> ·
+          <a href="/leistungen/">Leistungen</a> ·
+          <a href="/projekte/">Projekte</a> ·
+          <a href="/ueber-mich/">Über mich</a> ·
+          <a href="/kontakt/">Kontakt</a>
+        </p>
         <p style="margin:0">
           <a href="/impressum/">Impressum</a> ·
           <a href="/datenschutz/">Datenschutz</a> ·

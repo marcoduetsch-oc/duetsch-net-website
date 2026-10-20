@@ -8,14 +8,38 @@ aktivem Klick geladen — passt zum revDSG-Text in `/datenschutz/`.
 
 ## Konfiguration
 
-Alle änderbaren Werte stehen in **`src/config.ts`**: E-Mail-Adresse und der
-Cal.com-Buchungslink (`calLink` im Format `username/event-slug`). Auf der Website
-gibt es **keine Telefonnummer**; der Kontaktweg ist Cal.com oder E-Mail.
+Alle änderbaren Werte stehen in **`src/config.ts`**: E-Mail-Adresse, der
+Cal.com-Buchungslink (`calLink` im Format `username/event-slug`) und die Liste
+**`projects`** für die Seite `/projekte/`. Auf der Website gibt es **keine
+Telefonnummer**; der Kontaktweg ist Cal.com oder E-Mail.
+
+## Projekte pflegen (`/projekte/`)
+
+Die Projektliste ist ein Array in `src/config.ts`. Neues Tool = neues Objekt
+anhängen (Reihenfolge im Array = Reihenfolge auf der Seite):
+
+```ts
+export const projects = [
+  {
+    title: 'Supply-Chain-Simulator',
+    status: 'In Vorbereitung',   // erscheint, solange url leer ist
+    description: 'Ein bis drei Sätze zum Tool.',
+    points: ['Stichpunkt 1', 'Stichpunkt 2'],   // optional
+    url: '',                     // öffentliche Adresse, z. B. 'https://biergame.duetsch.net'
+  },
+] as const;
+```
+
+- `url` **leer** → die Karte zeigt den `status` («In Vorbereitung») statt eines Links.
+- `url` **gesetzt** → die Karte zeigt «Tool öffnen →» (öffnet in neuem Tab).
+- Verlinkte Tools erscheinen nur als normale Links, **nicht** als Embed — so bleibt
+  die Regel «keine externen Requests beim Seitenaufruf» gewahrt.
+- Danach `npm run build` (bzw. `npm run deploy`) — fertig.
 
 ## Struktur
 
 ```
-src/pages/        index, leistungen, ueber-mich, kontakt, impressum, datenschutz
+src/pages/        index, leistungen, projekte, ueber-mich, kontakt, impressum, datenschutz
 src/layouts/      Base.astro (Header, Footer, SEO, Canonical)
 src/styles/       global.css (Design-Tokens, kein Framework nötig)
 public/           favicon.svg, robots.txt
@@ -53,9 +77,9 @@ npm run preview  # gebaute Seite lokal prüfen
 
 ## Vor dem Go-Live noch einsetzen
 
-- [ ] `src/config.ts`: echten Cal.com-Handle einsetzen — aktuell steht dort der
-      Platzhalter `marco-duetsch/erstgespraech` (Marker `TODO(cal.com)`);
-      `deploy.sh` warnt beim Deploy, solange der Marker drin ist
+- [x] `src/config.ts`: echter Cal.com-Handle eingesetzt (20.10.2026)
+- [ ] `/projekte/`: `url` des Supply-Chain-Simulators eintragen, sobald er unter
+      der Subdomain erreichbar ist (heute zeigt die Karte «In Vorbereitung»)
 - [ ] `impressum.astro`: Strasse, PLZ, Rechtsform, UID/MWST (falls vorhanden)
 - [ ] `datenschutz.astro`: Aufbewahrungsdauer der Logfiles ([AUFBEWAHRUNGSDAUER])
 - [ ] `ueber-mich.astro`: Portraitfoto (optional), ggf. Abschlüsse/Zertifikate

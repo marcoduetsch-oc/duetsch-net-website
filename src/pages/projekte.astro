@@ -1,0 +1,62 @@
+---
+import Base from '../layouts/Base.astro';
+import { projects, calUrl, site } from '../config';
+---
+<Base
+  title="Projekte — Marco Dütsch"
+  description="Eigene Werkzeuge und Projekte von Marco Dütsch: unter anderem ein Supply-Chain-Simulator, in dem fünf KI-Agenten eine vollständige Lieferkette steuern."
+>
+  <section>
+    <div class="wrap">
+      <p class="eyebrow">Projekte</p>
+      <h1>Werkzeuge, die aus der Arbeit entstanden sind.</h1>
+      <p class="lead narrow">
+        Manche Fragen lassen sich am besten mit einem Modell beantworten statt mit
+        einer Folie. Hier stehen die Werkzeuge, die ich dafür selbst gebaut habe —
+        offen zugänglich, sobald sie reif genug sind.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-alt">
+    <div class="wrap">
+      <p class="eyebrow">Eigene Tools</p>
+      <h2>Zum Ausprobieren.</h2>
+      <div class="cards cards-auto">
+        {projects.map((project, index) => (
+          <article class="card">
+            <p class="card-num">{String(index + 1).padStart(2, '0')}</p>
+            <h3>{project.title}</h3>
+            <p>{project.description}</p>
+            <ul>
+              {project.points.map((point) => <li>{point}</li>)}
+            </ul>
+            <p class="card-foot">
+              {project.url
+                ? <a href={project.url} target="_blank" rel="noopener">Tool öffnen →</a>
+                : <span class="muted">{project.status}</span>}
+            </p>
+          </article>
+        ))}
+      </div>
+      <p class="muted" style="margin-top:28px">
+        Weitere Tools sind in Arbeit. Diese Seite wächst mit den Projekten.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap narrow">
+      <h2>Ein Modell für Ihre Frage?</h2>
+      <p>
+        Wenn Sie eine Entscheidung mit Zahlen absichern wollen — Bestände, Lieferfähigkeit,
+        Kosten, Auslastung — beschreiben Sie mir in zwei Sätzen die Ausgangslage. Ich melde
+        mich mit einer Einschätzung, ob ein Modell dafür sinnvoll ist oder ein Gespräch reicht.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href={calUrl} target="_blank" rel="noopener">Erstgespräch vereinbaren</a>
+        <a class="btn btn-ghost" href={`mailto:${site.email}`}>{site.email}</a>
+      </div>
+    </div>
+  </section>
+</Base>

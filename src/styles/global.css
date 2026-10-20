@@ -92,6 +92,10 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 48px 0; }
 .card .card-foot { margin-top: auto; font-size: .9rem; font-weight: 600; }
 .card .card-foot a { text-decoration: none; }
 .card-num { font-size: .78rem; font-weight: 700; color: var(--accent); letter-spacing: .1em; margin-bottom: .7em; }
+/* Karten-Raster, das sich an die Anzahl der Einträge anpasst (1 bis 3 pro Zeile) */
+.cards-auto { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+/* Einzelne Karte nicht über die volle Breite ziehen, solange wenige Einträge da sind */
+.cards-auto > .card { max-width: 460px; }
 
 /* ---------- Track record / Timeline ---------- */
 .timeline { list-style: none; margin: 36px 0 0; padding: 0; border-left: 2px solid var(--line); }
@@ -126,8 +130,9 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 48px 0; }
   .cards { grid-template-columns: 1fr; }
   section { padding: 56px 0; }
   .hero { padding: 64px 0 48px; }
-  .nav { gap: 14px; }
-  .nav a:not(.btn) { display: none; }
+  .nav { gap: 10px 14px; flex-wrap: wrap; justify-content: flex-end; }
+  .nav a:not(.btn) { font-size: .92rem; }
+  .site-header .wrap { padding-top: 8px; padding-bottom: 8px; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
 
