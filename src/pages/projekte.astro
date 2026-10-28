@@ -33,7 +33,7 @@ import { projects, calUrl, site } from '../config';
             </ul>
             <p class="card-foot">
               {project.url
-                ? <a href={project.url} target="_blank" rel="noopener">Tool öffnen →</a>
+                ? <a href={project.url} target="_blank" rel="noopener">{project.linkLabel ?? 'Tool öffnen →'}</a>
                 : <span class="muted">{project.status}</span>}
             </p>
           </article>

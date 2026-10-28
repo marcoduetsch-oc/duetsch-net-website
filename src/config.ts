@@ -24,7 +24,8 @@ export const calUrl = `${site.calOrigin}/${site.calLink}`;
 export const projects = [
   {
     title: 'Supply-Chain-Simulator',
-    status: 'In Vorbereitung',
+    status: 'In Vorbereitung', // erscheint nur, solange `url` leer ist
+    linkLabel: 'Biergame spielen →', // Text des Links, wenn `url` gesetzt ist
     description:
       'Multi-Agenten-Simulation einer vollständigen Lieferkette: fünf KI-Agenten ' +
       '(Nachfrage, Beschaffung, Produktion, Lager, Logistik) entscheiden autonom ' +
@@ -36,6 +37,6 @@ export const projects = [
       'Engpass- und Stockout-Analyse über den gesamten Verlauf',
       'Python, Streamlit, Plotly',
     ],
-    url: '',
+    url: 'https://biergame.duetsch.net',
   },
 ] as const;

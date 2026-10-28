@@ -23,6 +23,7 @@ export const projects = [
   {
     title: 'Supply-Chain-Simulator',
     status: 'In Vorbereitung',   // erscheint, solange url leer ist
+    linkLabel: 'Biergame spielen →',  // Link-Text, wenn url gesetzt ist
     description: 'Ein bis drei Sätze zum Tool.',
     points: ['Stichpunkt 1', 'Stichpunkt 2'],   // optional
     url: '',                     // öffentliche Adresse, z. B. 'https://biergame.duetsch.net'
@@ -31,7 +32,8 @@ export const projects = [
 ```
 
 - `url` **leer** → die Karte zeigt den `status` («In Vorbereitung») statt eines Links.
-- `url` **gesetzt** → die Karte zeigt «Tool öffnen →» (öffnet in neuem Tab).
+- `url` **gesetzt** → die Karte zeigt den Link (`linkLabel`, sonst «Tool öffnen →»;
+  öffnet in neuem Tab).
 - Verlinkte Tools erscheinen nur als normale Links, **nicht** als Embed — so bleibt
   die Regel «keine externen Requests beim Seitenaufruf» gewahrt.
 - Danach `npm run build` (bzw. `npm run deploy`) — fertig.
@@ -114,9 +116,11 @@ npm run preview  # gebaute Seite lokal prüfen
 ## Vor dem Go-Live noch einsetzen
 
 - [x] `src/config.ts`: echter Cal.com-Handle eingesetzt (20.10.2026)
-- [ ] `/projekte/`: `url` des Supply-Chain-Simulators eintragen, sobald er unter
-      der Subdomain erreichbar ist (heute zeigt die Karte «In Vorbereitung»)
-- [ ] `impressum.astro`: Strasse, PLZ, Rechtsform, UID/MWST (falls vorhanden)
+- [x] `/projekte/`: `url` des Supply-Chain-Simulators gesetzt →
+      `https://biergame.duetsch.net`, Link-Text «Biergame spielen →» (28.10.2026)
+- [x] `impressum.astro`: Strasse und PLZ eingesetzt — Falkenstrasse 20,
+      8400 Winterthur (28.10.2026)
+- [ ] `impressum.astro`: Rechtsform, UID/MWST (falls vorhanden)
 - [ ] `datenschutz.astro`: Aufbewahrungsdauer der Logfiles ([AUFBEWAHRUNGSDAUER])
 - [ ] `ueber-mich.astro`: Portraitfoto (optional), ggf. Abschlüsse/Zertifikate
 - [ ] Zahlen/Referenzen in `index.astro` (nur echte, belegbare Angaben)
