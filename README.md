@@ -118,6 +118,8 @@ npm run preview  # gebaute Seite lokal prüfen
 - [x] `src/config.ts`: echter Cal.com-Handle eingesetzt (20.10.2026)
 - [x] `/projekte/`: `url` des Supply-Chain-Simulators gesetzt →
       `https://biergame.duetsch.net`, Link-Text «Biergame spielen →» (28.10.2026)
+- [x] `/projekte/`: Winterthur 3D verlinkt → `https://winterthur-3d.duetsch.net`,
+      Link-Text «Modell öffnen →» (29.10.2026)
 - [x] `impressum.astro`: Strasse und PLZ eingesetzt — Falkenstrasse 20,
       8400 Winterthur (28.10.2026)
 - [ ] `impressum.astro`: Rechtsform, UID/MWST (falls vorhanden)
