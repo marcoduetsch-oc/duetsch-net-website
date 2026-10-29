@@ -39,4 +39,20 @@ export const projects = [
     ],
     url: 'https://biergame.duetsch.net',
   },
+  {
+    title: 'Winterthur 3D',
+    status: 'In Vorbereitung', // erscheint nur, solange `url` leer ist
+    linkLabel: 'Modell öffnen →', // Text des Links, wenn `url` gesetzt ist
+    description:
+      'Interaktives 3D-Stadtmodell von Winterthur im Browser, aufgebaut aus echten ' +
+      'swisstopo-Geodaten. Gelände, Gebäudevolumen, Strassen und Orthofoto lassen sich ' +
+      'als Layer ein- und ausblenden, die Ansicht ist frei dreh- und zoombar.',
+    points: [
+      'Gelände, Gebäude (LOD2), Strassen und Orthofoto als schaltbare Layer',
+      'Datenquellen: swissALTI3D, swissBUILDINGS3D 3.0, swissTLM3D, SWISSIMAGE',
+      'Streaming grosser Datenmengen via OGC 3D Tiles',
+      'three.js, 3D Tiles, Vite',
+    ],
+    url: 'https://winterthur-3d.duetsch.net',
+  },
 ] as const;
